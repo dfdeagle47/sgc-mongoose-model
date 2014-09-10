@@ -1,7 +1,5 @@
 # Created by http://www.gitignore.io
 
-
-
 ### Dot files ###
 .*
 
@@ -22,11 +20,10 @@ pids
 node_modules
 
 ### Bower dependency directory ###
-/bower_components
-!/.bowerrc
+bower_components
 
 ### Build output directory ###
-#src/public/dist
+dist
 
 ### JSHint ###
 !/.jshintrc

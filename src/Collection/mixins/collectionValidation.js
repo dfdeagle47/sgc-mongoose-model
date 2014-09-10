@@ -1,5 +1,5 @@
 define([
-	'../../../ModelError'
+	'../../Error/ModelError'
 ], function (
 	ModelError
 ) {

@@ -1,54 +1,35 @@
 {
-  "name": "sgc-mongoose-model",
-  "description": "",
-  "homepage": "http://www.sagacify.com",
-  "main": "sgc-mongoose-model.js",
-  "keywords": [
-    "model",
-    "view",
-    "controller",
-    "bind",
-    "client",
-    "browser"
-  ],
-  "author": {
-    "name": "Sagacify Team",
-    "email": "info@sagacify.com"
-  },
-  "ignore": [
-    "docs",
-    "reports",
-    "spec",
-    ".gitignore",
-    ".travis.yml",
-    ".editorconfig",
-    ".jshintc",
-    "jsdoc",
-    "build",
-    "build.cmd",
-    "Gruntfile.js",
-    "CONTRIBUTING.md",
-    "package.json",
-    "addrem",
-    "getdeps",
-    "tmp"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Sagacify/sgc-mongoose-model.git"
-  },
-  "dependencies": {
-    "sgc-model": "git@github.com:Sagacify/sgc-model.git",
-    "requirejs": "^2.1.14",
-    "jquery": "^2.1.1"
-  },
-  "_release": "592d39e3de",
-  "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "592d39e3de5791140e32f240af4b391f944faa0b"
-  },
-  "_source": "git@github.com:Sagacify/sgc-mongoose-model.git",
-  "_target": "*",
-  "_originalSource": "git@github.com:Sagacify/sgc-mongoose-model.git"
+	"name": "sgc-mongoose-model",
+	"private": true,
+	"version": "0.0.1",
+	"description": "Sagacify's client data Model module.",
+	"main": "dist/sgc-mongoose-model.min.js",
+	"keywords": [
+		"mongoose",
+		"model",
+		"view",
+		"controller",
+		"bind",
+		"client",
+		"browser"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Sagacify/sgc-mongoose-model.git"
+	},
+	"dependencies": {
+		"underscore": "^1.7.0",
+		"requirejs": "^2.1.14",
+		"backbone": "^1.1.2",
+		"jquery": "^2.1.1",
+		"sgc-model": "git@github.com:Sagacify/sgc-model.git"
+	},
+	"author": {
+		"name": "Sagacify Team",
+		"email": "info@sagacify.com"
+	},
+	"bugs": {
+		"url": "https://github.com/Sagacify/sgc-mongoose-model/issues"
+	},
+	"homepage": "https://github.com/Sagacify/sgc-mongoose-model"
 }

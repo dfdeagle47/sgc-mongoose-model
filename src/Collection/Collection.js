@@ -1,27 +1,23 @@
 define([
-	'bower_components/sgc-model/src/SagaModel/Collection/Collection',
-	
-	'../../ModelError',
+	'sgc-model',
 
-	'./mixins/collectionHelpers',
 	'./mixins/collectionPropertiesDefinitions',
-	'./mixins/collectionSync',
-	'./mixins/collectionValidation'
-
+	'./mixins/collectionValidation',
+	'./mixins/collectionHelpers',
+	'./mixins/collectionSync'
 ], function (
-	Collection, 
+	SGCModel,
 
-	ModelError,
-
-	collectionHelpers,
 	collectionPropertiesDefinitions,
-	collectionSync,
-	collectionValidation
-
+	collectionValidation,
+	collectionHelpers,
+	collectionSync
 ) {
 	'use strict';
-	var MongooseCollection = Collection.extend({
 
+	var SagaCollection = SGCModel.Collection;
+
+	var MongooseCollection = SagaCollection.extend({
 
 		constructor: function (models, options) {
 
@@ -31,7 +27,7 @@ define([
 
 			this._virtuals = {};
 			this.defineSchemaProperties();
-			Collection.prototype.constructor.apply(this, arguments);
+			SagaCollection.prototype.constructor.apply(this, arguments);
 		},
 
 		__isAVirtual: function(attribute){
@@ -80,7 +76,7 @@ define([
 
 		get: function (id, options) {
 			if (id instanceof this.model) {
-				return Collection.prototype.get.apply(this, arguments);
+				return SagaCollection.prototype.get.apply(this, arguments);
 			}
 			var url = this.url instanceof Function ? this.url() : this.url;
 
@@ -104,8 +100,7 @@ define([
 				return doc;
 			}
 
-			return Collection.prototype.get.apply(this, arguments);
-
+			return SagaCollection.prototype.get.apply(this, arguments);
 		},
 
 		getBySlug: function (slug) {

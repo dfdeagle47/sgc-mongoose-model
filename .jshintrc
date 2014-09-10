@@ -1,5 +1,4 @@
 {
-	"es3": true,
 	"boss": true,
 	"expr": true,
 	"curly": true,
@@ -15,7 +14,8 @@
 	"nonbsp": false,
 	"noempty": true,
 	"quotmark": "single",
-	"evil": "true",
+
+	"evil": true,
 
 	"browser": true,
 	"node": false,
@@ -28,12 +28,12 @@
 		"requirejs": false,
 		"require": false,
 		"define": false,
+
 		"it": false,
 		"describe": false,
 
 		"Backbone": false,
 		"App": false,
-		"app": false,
 		"$": false,
 		"_": false
     }

@@ -1,6 +1,6 @@
 define([
 	'../../Collection/Collection',
-	'../../../ModelError'
+	'../../Error/ModelError'
 ], function (
 	SagaCollection,
 	ModelError

@@ -1,36 +1,27 @@
 define([
-	'bower_components/sgc-model/src/SagaModel/Model/Model',
-	
-	'../../MongooseModel/Collection/Collection',
+	'sgc-model',
 
-	// 'saga/types/validateType',
-	// 'saga/ajax/SGAjax',
-
-	
-	'./mixins/modelSchemaAction',
 	'./mixins/modelSchemaPropertiesDefinition',
-	'./mixins/modelSchemaSetter',
-	'./mixins/modelSchemaSync',
 	'./mixins/modelSchemaValidation',
-	'./mixins/modelSchemaGetter'
-
+	'./mixins/modelSchemaAction',
+	'./mixins/modelSchemaSetter',
+	'./mixins/modelSchemaGetter',
+	'./mixins/modelSchemaSync'
 ], function (
-	Model,
-	SagaCollection, 
-	// is, 
-	// SGAjax,
+	SGCModel,
 
-	modelSchemaAction,
 	modelSchemaPropertiesDefinition, 
-	modelSchemaSetter,
-	modelSchemaSync,
 	modelSchemaValidation,
-	modelSchemaGetter
-	) {
-
+	modelSchemaAction,
+	modelSchemaSetter,
+	modelSchemaGetter,
+	modelSchemaSync
+) {
 	'use strict';
 
-	var MongooseModel = Model.extend({
+	var SagaModel = SGCModel.Model;
+
+	var MongooseModel = SagaModel.extend({
 
 		constructor: function(attributes, options){
 			if(options){
@@ -52,7 +43,7 @@ define([
 			this._originalAttributes = {};
 			this.defineSchemaProperties();
 
-			var ret = Model.prototype.constructor.apply(this, arguments);
+			var ret = SagaModel.prototype.constructor.apply(this, arguments);
 			this.postCreate && this.postCreate(options);
 
 			this._recorded = {};
@@ -126,7 +117,7 @@ define([
 
 			window.instances[this.cid] = 'cleared';
 
-			return Model.prototype.clear.apply(this, arguments);
+			return SagaModel.prototype.clear.apply(this, arguments);
 		},
 
 		validForSave : function(){
@@ -143,7 +134,7 @@ define([
 		},
 
 		clone: function () {
-			var clone = Model.prototype.clone.apply(this, arguments);
+			var clone = SagaModel.prototype.clone.apply(this, arguments);
 			for(var attr in clone.attributes) {
 				if(clone.attributes[attr] instanceof MongooseModel) {
 					clone.attributes[attr] = clone.attributes[attr].clone();

@@ -1,5 +1,5 @@
 define([
-	'saga/model/ModelError'
+	'../../../ModelError'
 ], function (
 	ModelError
 ) {

@@ -1,8 +1,8 @@
 define([
-	'saga/validation/ValidateFormat',
-	'saga/model/MongooseModel/Collection/Collection',
-	'saga/types/validateType'
-], function (ValidateFormat, SagaCollection, is) {
+	'../../Collection/Collection',
+], function (
+	SagaCollection
+) {
 	'use strict';
 
 	return function (SagaModel) {
@@ -134,7 +134,7 @@ define([
 					if (attribute in this.mongooseSchema) {
 						return this.setMSchemaAttribute(attribute, raw, options);
 					} else {
-						if (is.Object(raw) && !raw instanceof Backbone.Model) {
+						if (_.isObject(raw) && !raw instanceof Backbone.Model) {
 							//Check mpath attributes
 							for (var key in raw) {
 								this.set(attribute + '.' + key, raw[key]);

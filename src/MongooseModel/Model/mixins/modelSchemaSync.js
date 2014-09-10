@@ -1,7 +1,7 @@
 define([
 	'../../Collection/Collection',
 ], function (
-	SagaCollection,
+	SagaCollection
 ) {
 	'use strict';
 

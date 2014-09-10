@@ -1,0 +1,41 @@
+{
+    "name": "sgc-mongoose-model",
+    "description": "",
+    "url": "http://www.sagacify.com",
+    "keywords": [
+        "model",
+        "view",
+        "controller",
+        "bind",
+        "client",
+        "browser"
+    ],
+    "author": "Sagacify Team <yvan@sagacify.com>",
+    "devDependencies": {
+        "mocha": "^1.21.4",
+        "grunt-cli": "^0.1.13",
+        "load-grunt-tasks": "^0.6.0",
+        "grunt-contrib-requirejs": "^0.4.4",
+        "grunt-contrib-imagemin": "^0.8.1",
+        "grunt-contrib-htmlmin": "^0.3.0",
+        "grunt-contrib-jshint": "^0.10.0",
+        "grunt-contrib-cssmin": "^0.10.0",
+        "grunt-contrib-clean": "^0.6.0",
+        "grunt-contrib-copy": "^0.5.0",
+        "grunt-mocha-test": "^0.11.0",
+        "grunt-preprocess": "^4.0.0",
+        "grunt-istanbul": "^0.2.4",
+        "grunt-jsonlint": "^1.0.4",
+        "grunt-jscs": "^0.6.1"
+    },
+    "scripts": {
+        "test": "phantomjs test/vendor/runner.js test/index.html?noglobals=true && coffee test/model.coffee"
+    },
+    "main": "src/index.js",
+    "version": "1.0.0",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Sagacify/sgc-mongoose-model.git"
+    }
+}

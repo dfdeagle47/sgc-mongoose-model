@@ -38,7 +38,9 @@
     "url": "https://github.com/Sagacify/sgc-mongoose-model.git"
   },
   "dependencies": {
-    "sgc-model": "git@github.com:Sagacify/sgc-model.git"
+    "sgc-model": "git@github.com:Sagacify/sgc-model.git",
+    "requirejs": "^2.1.14",
+    "jquery": "^2.1.1"
   },
   "_release": "592d39e3de",
   "_resolution": {

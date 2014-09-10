@@ -1,7 +1,7 @@
 define([
-	'saga/model/SagaModel/Model/Model',
-
-	'saga/model/MongooseModel/Collection/Collection',
+	'bower_components/sgc-model/src/SagaModel/Model/Model',
+	
+	'../../MongooseModel/Collection/Collection',
 
 	'saga/types/validateType',
 	'saga/ajax/SGAjax',

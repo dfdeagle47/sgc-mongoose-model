@@ -1,8 +1,7 @@
 define([
-	'saga/model/SagaModel/Collection/Collection',
+	'bower_components/sgc-model/src/SagaModel/Collection/Collection',
 	
-	'saga/types/validateType',
-	'saga/model/ModelError',
+	'../../ModelError',
 
 	'./mixins/collectionHelpers',
 	'./mixins/collectionPropertiesDefinitions',
@@ -11,7 +10,7 @@ define([
 
 ], function (
 	Collection, 
-	is,
+
 	ModelError,
 
 	collectionHelpers,

@@ -1,14 +1,8 @@
 define([
-	'saga/validation/ValidateFormat',
-	'saga/model/MongooseModel/Collection/Collection',
-	'saga/types/validateType',
-	'saga/ajax/SGAjax',
-	'saga/model/ModelError'
+	'../../Collection/Collection',
+	'../../../ModelError'
 ], function (
-	ValidateFormat,
 	SagaCollection,
-	is,
-	SGAjax,
 	ModelError
 ) {
 	'use strict';

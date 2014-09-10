@@ -32,9 +32,6 @@ function GruntTasks (grunt) {
 			]
 		},
 		clean: {
-			coverage: [
-				'test/coverage'
-			],
 			dist: [
 				'dist'
 			]
@@ -43,9 +40,9 @@ function GruntTasks (grunt) {
 			all: {
 				options: {
 					baseUrl: 'src',
-					name: 'sgc-model',
+					name: 'sgc-mongoose-model',
 					// mainConfigFile: 'src/public/dist/init.js',
-					out: 'dist/sgc-model.min.js',
+					out: 'dist/sgc-mongoose-model.min.js',
 					optimize: 'uglify2',
 					generateSourceMaps: false,
 					preserveLicenseComments: false,

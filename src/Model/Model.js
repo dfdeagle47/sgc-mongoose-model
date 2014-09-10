@@ -1,6 +1,4 @@
 define([
-	'sgc-model',
-
 	'./mixins/modelSchemaPropertiesDefinition',
 	'./mixins/modelSchemaValidation',
 	'./mixins/modelSchemaAction',
@@ -8,8 +6,6 @@ define([
 	'./mixins/modelSchemaGetter',
 	'./mixins/modelSchemaSync'
 ], function (
-	SGCModel,
-
 	modelSchemaPropertiesDefinition, 
 	modelSchemaValidation,
 	modelSchemaAction,
@@ -19,7 +15,7 @@ define([
 ) {
 	'use strict';
 
-	var SagaModel = SGCModel.Model;
+	var SagaModel = require('sgc-model').Model;
 
 	var MongooseModel = SagaModel.extend({
 

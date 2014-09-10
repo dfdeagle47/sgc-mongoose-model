@@ -1,13 +1,9 @@
 define([
-	'sgc-model',
-
 	'./mixins/collectionPropertiesDefinitions',
 	'./mixins/collectionValidation',
 	'./mixins/collectionHelpers',
 	'./mixins/collectionSync'
 ], function (
-	SGCModel,
-
 	collectionPropertiesDefinitions,
 	collectionValidation,
 	collectionHelpers,
@@ -15,7 +11,7 @@ define([
 ) {
 	'use strict';
 
-	var SagaCollection = SGCModel.Collection;
+	var SagaCollection = require('sgc-model').Collection;
 
 	var MongooseCollection = SagaCollection.extend({
 

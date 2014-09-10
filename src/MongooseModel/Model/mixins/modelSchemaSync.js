@@ -1,15 +1,14 @@
 define([
-	'saga/validation/ValidateFormat',
-	'saga/model/MongooseModel/Collection/Collection',
-	'saga/types/validateType',
-	'saga/ajax/SGAjax'
-], function (ValidateFormat, SagaCollection, is, SGAjax) {
+	'../../Collection/Collection',
+], function (
+	SagaCollection,
+) {
 	'use strict';
 
 	return function(SagaModel){
 		return {
 			_generateUrl: function(){
-				return  is.Function(this.url)?this.url():this.url;
+				return  _.isFunction(this.url)?this.url():this.url;
 			},
 
 			url: function(options){
@@ -158,7 +157,7 @@ define([
 								parent[attr] = val;
 							}
 						}
-						else if(is.Object(parent[attr])||is.Array(parent[attr])){
+						else if(_.isObject(parent[attr])||_.isArray(parent[attr])){
 							childToJSON(parent[attr]);
 						}
 					}

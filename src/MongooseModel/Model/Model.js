@@ -3,8 +3,8 @@ define([
 	
 	'../../MongooseModel/Collection/Collection',
 
-	'saga/types/validateType',
-	'saga/ajax/SGAjax',
+	// 'saga/types/validateType',
+	// 'saga/ajax/SGAjax',
 
 	
 	'./mixins/modelSchemaAction',
@@ -17,8 +17,8 @@ define([
 ], function (
 	Model,
 	SagaCollection, 
-	is, 
-	SGAjax,
+	// is, 
+	// SGAjax,
 
 	modelSchemaAction,
 	modelSchemaPropertiesDefinition, 

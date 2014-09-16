@@ -34,6 +34,10 @@
 
 		"Backbone": false,
 		"App": false,
+		"sinon": false,
+		"beforeEach": false,
+		"afterEach": false,
+		"app": false,
 		"$": false,
 		"_": false
     }

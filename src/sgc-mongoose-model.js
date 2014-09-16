@@ -1,8 +1,12 @@
-define(function (require) {
+define([
+	'./RemoteCollection/Collection',
+	'./RemoteModel/Model'
+	],
+function (
+	Collection, 
+	Model
+		) {
 	'use strict';
-
-	var Collection = require('./Collection/Collection');
-	var Model = require('./Model/Model');
 
 	return {
 		Collection: Collection,

@@ -13,5 +13,13 @@ define([], function () {
 		this.model = options.model;
 	};
 
+	_.extend(ModelError.prototype, {
+		clear: function(){
+			this.model= null;
+			this.identifier = null;
+			this.verbose = null;
+		}
+	});
+	
 	return ModelError;
 });

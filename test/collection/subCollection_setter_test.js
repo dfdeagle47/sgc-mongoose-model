@@ -13,6 +13,7 @@ define([
 
         describe('Testing Sub collection', function() {
 
+
             it('Auto generator correct collection', function(){
                 var parentModel = new (Model.extend({},
                 {

@@ -143,6 +143,7 @@ define([
 
 
              it('Test url from item of collection /api/users/181/comments/3813', function(){
+                
                 var parentModel = new (Model.extend({},
                 {
                     modelName:'User'

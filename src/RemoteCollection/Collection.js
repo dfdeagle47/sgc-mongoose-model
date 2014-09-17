@@ -1,14 +1,18 @@
 define([
 	'./mixins/sync',
 	'./mixins/pagination',
+	'./mixins/helpers',
 	'./../shared/actions_mixin',
-	'./../shared/error_mixin'
+	'./../shared/error_mixin',
+	'./../RemoteModel/Model'
 
 	], function (
 	sync,
 	pagination,
+	helpers,
 	actions_mixin,
-	error_mixin
+	error_mixin,
+	Model
 ) {
 	'use strict';
 
@@ -37,11 +41,16 @@ define([
 			this.configureFilters();
 
 			return res;
-		}
+		}, 
+
+		model:Model
+
 	});
 
 	_.extend(RemoteCollection.prototype, sync(SagaCollection));
 	_.extend(RemoteCollection.prototype, pagination(SagaCollection));
+	_.extend(RemoteCollection.prototype, helpers(SagaCollection));
+	
 	_.extend(RemoteCollection.prototype, actions_mixin(SagaCollection));
 	_.extend(RemoteCollection.prototype, error_mixin(SagaCollection));
 	

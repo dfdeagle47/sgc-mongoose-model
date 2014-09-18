@@ -10,8 +10,24 @@ define([
         var Collection = RemoteModel.Collection;
 
         describe('Test url rooting inside model and submodel ', function() {
-            
-        it('Test default url of parent model /api/users/f4dsf43d41fs', function(){
+     
+
+            it('Test default url with custom base url', function(){
+                
+                var TheModel = Model.extend({},{ modelName:'User'});
+
+                var newModel = new TheModel();
+                newModel.url().should.equal('/api/users');
+
+
+                var existingModel = new TheModel({
+                    _id:'f4dsf43d41fs'
+                });
+                existingModel.url({baseApi:'/tralala'}).should.equal('/tralala/users/f4dsf43d41fs');
+                existingModel.url({baseApi:'/api'}).should.equal('/api/users/f4dsf43d41fs');
+            });
+
+            it('Test default url of parent model /api/users/f4dsf43d41fs', function(){
                 
                 var TheModel = Model.extend({},{ modelName:'User'});
 

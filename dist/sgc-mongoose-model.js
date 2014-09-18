@@ -333,7 +333,7 @@ define('RemoteCollection/mixins/navigation',[], function () {
 					base = this.constructor.getCollectionName();
 				}
 
-				if (this._parent && this._path) {
+				if (this._parent && this._path && !this.constructor.navigateRoot) {
 					 base = this._parent.navigateRepresentation()+'/'+ this._path;
 				}
 
@@ -468,13 +468,17 @@ define('shared/classShared_mixin',[], function () {
 
 	return function(/*SagaModel*/){
 		return {
+			
 			modelName: null,
+
 			getCollectionName: function(){
 				if (!_.isString(this.modelName)) {
 					return '';
 				}
 				return this.modelName.toLowerCase()+'s';
-			}			
+			}, 
+
+			navigateRoot:false,	
 		};
 	};
 });
@@ -846,8 +850,9 @@ define('RemoteModel/mixins/navigation',[], function () {
 	return function(){
 		return {
 			navigateRepresentation: function(){
-				var base = ''
-				if (this._parent) {
+				var base = '';
+
+				if (this._parent && !this.constructor.navigateRoot) {
 					base = this._parent.navigateRepresentation()+'/'+this._path||'';
 				}
 

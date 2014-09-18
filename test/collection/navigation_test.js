@@ -84,6 +84,26 @@ define([
                 parentModel.author.navigateRepresentation().should.equal('users/35151/author/6512');
             });
 
+            it('Test navigate with navigate root for comment to true representation /comments/321', function(){
+                var parentModel = new (Model.extend({},
+                {
+                    modelName:'User'
+                }))('35151');
+                var SubCollection = Collection.extend({},
+                {
+                    modelName:'Comment',
+                    navigateRoot:true
+                });
+
+                parentModel.generateSchemaAttribute('comments', {type:'COLLECTION', generator:SubCollection});
+
+                parentModel.comments.add('321');
+                
+                parentModel.comments.at(0).navigateRepresentation().should.equal('comments/321');
+
+            });
+
+
         });
     };
 }); 

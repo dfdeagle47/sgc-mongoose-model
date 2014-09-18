@@ -10,7 +10,7 @@ define([], function () {
 					base = this.constructor.getCollectionName();
 				}
 
-				if (this._parent && this._path) {
+				if (this._parent && this._path && !this.constructor.navigateRoot) {
 					 base = this._parent.navigateRepresentation()+'/'+ this._path;
 				}
 

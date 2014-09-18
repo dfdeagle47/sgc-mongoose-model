@@ -4,8 +4,9 @@ define([], function () {
 	return function(){
 		return {
 			navigateRepresentation: function(){
-				var base = ''
-				if (this._parent) {
+				var base = '';
+
+				if (this._parent && !this.constructor.navigateRoot) {
 					base = this._parent.navigateRepresentation()+'/'+this._path||'';
 				}
 

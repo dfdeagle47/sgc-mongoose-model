@@ -443,7 +443,11 @@ define('RemoteModel/mixins/sync',[], function () {
 	return function(/*SagaModel*/){
 		return {
 
-			urlRoot: function(){
+			urlRoot: function(options){
+				options = _.defaults(options||{}, {
+					baseApi: '/api'
+				});
+
 				if (this._customUrl) {
 					return this._customUrl;
 				}
@@ -456,7 +460,7 @@ define('RemoteModel/mixins/sync',[], function () {
 					return _.result(this.collection, 'url');
 				}
 
-				return '/api/'+this.constructor.getCollectionName();
+				return options.baseApi+'/'+this.constructor.getCollectionName();
 			}
 		};
 	};

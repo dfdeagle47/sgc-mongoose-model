@@ -41,21 +41,27 @@ function GruntTasks (grunt) {
 				options: {
 					baseUrl: 'src',
 					name: 'sgc-mongoose-model',
-					// mainConfigFile: 'src/public/dist/init.js',
 					out: 'dist/sgc-mongoose-model.min.js',
 					optimize: 'uglify2',
 					generateSourceMaps: false,
 					preserveLicenseComments: false,
 					inlineText: true,
 					findNestedDependencies: true
-					// paths: {
-					// 	requireLib: 'bower_components/requirejs/require'
-					// },
-					// include: [
-					// 	'requireLib'
-					// ]
+				}
+			},
+			concat: {
+				options: {
+					baseUrl: 'src',
+					name: 'sgc-mongoose-model',
+					out: 'dist/sgc-mongoose-model.js',
+					optimize: 'none',
+					generateSourceMaps: false,
+					preserveLicenseComments: false,
+					inlineText: true,
+					findNestedDependencies: true
 				}
 			}
+
 		},
 		mocha_phantomjs: {
 			test: [

@@ -6,8 +6,11 @@ define([
 	'./mixins/getterCreator',
 	'./mixins/lifeCycle',
 	'./mixins/validation',
+	'./mixins/navigation',
 	'./../shared/actions_mixin',
-	'./../shared/error_mixin'
+	'./../shared/error_mixin',
+	'./../shared/classShared_mixin'
+	
 ], function (
 	sync,
 	schema,
@@ -16,13 +19,16 @@ define([
 	getterCreator,
 	lifeCycle,
 	validation,
+	navigation,
 	actions_mixin, 
-	error_mixin
+	error_mixin,
+	classShared_mixin
 
 ) {
 	'use strict';
 	var SagaModel = require('sgc-model').Model;
-	
+
+	var clazz = _.extend({}, classShared_mixin(SagaModel));
 
 	var RemoteModel = SagaModel.extend({
 
@@ -43,15 +49,7 @@ define([
 
 		idAttribute: '_id'
 		
-	}, {
-		modelName: null,
-		getCollectionName: function(){
-			if (!_.isString(this.modelName)) {
-				return '';
-			}
-			return this.modelName.toLowerCase()+'s';
-		}
-	});
+	}, clazz);
 
 	_.extend(RemoteModel.prototype, sync(SagaModel));
 	_.extend(RemoteModel.prototype, schema(SagaModel));
@@ -60,6 +58,7 @@ define([
 	_.extend(RemoteModel.prototype, getterCreator(SagaModel));
 	_.extend(RemoteModel.prototype, lifeCycle(SagaModel));
 	_.extend(RemoteModel.prototype, validation(SagaModel));
+	_.extend(RemoteModel.prototype, navigation(SagaModel));
 	
 	_.extend(RemoteModel.prototype, actions_mixin(SagaModel));
 	_.extend(RemoteModel.prototype, error_mixin(SagaModel));

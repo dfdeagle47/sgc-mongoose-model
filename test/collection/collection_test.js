@@ -1,11 +1,13 @@
 define([
 	'./helpers_test',
 	'./subCollection_setter_test',
-	'./paginations_test'
+	'./paginations_test',
+	'./navigation_test'
 ], function (
 	helpers,
 	subCollection_setter_test,
-	paginations_test
+	paginations_test,
+	navigation_test
 	) {
 	'use strict';
 
@@ -13,5 +15,6 @@ define([
 		helpers();
 		subCollection_setter_test();
 		paginations_test();
+		navigation_test();
 	};
 });

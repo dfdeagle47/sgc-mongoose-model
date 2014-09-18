@@ -4,11 +4,7 @@ define([], function () {
 	return function(/*SagaModel*/){
 		return {
 
-			urlRoot: function(options){
-				options = _.defaults(options||{}, {
-					baseApi: '/api'
-				});
-
+			urlRoot: function(){
 				if (this._customUrl) {
 					return this._customUrl;
 				}
@@ -21,7 +17,7 @@ define([], function () {
 					return _.result(this.collection, 'url');
 				}
 
-				return options.baseApi+'/'+this.constructor.getCollectionName();
+				return '/api/'+this.constructor.getCollectionName();
 			}
 		};
 	};

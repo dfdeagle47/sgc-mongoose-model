@@ -321,6 +321,32 @@ define('RemoteCollection/mixins/helpers',[], function () {
 
 
 
+define('RemoteCollection/mixins/navigation',[], function () {
+	
+
+	return function(){
+		return {
+			navigateRepresentation: function(){
+				var base  = '';
+
+				if (this.constructor.getCollectionName()) {
+					base = this.constructor.getCollectionName();
+				}
+
+				if (this._parent && this._path) {
+					 base = this._parent.navigateRepresentation()+'/'+ this._path;
+				}
+
+				return base;
+			}
+		};
+	};
+});
+
+
+
+
+		
 define('shared/actions_mixin',[], function () {
 	
 
@@ -437,17 +463,28 @@ define('shared/error_mixin',[
 		};
 	};
 });
+define('shared/classShared_mixin',[], function () {
+	
+
+	return function(/*SagaModel*/){
+		return {
+			modelName: null,
+			getCollectionName: function(){
+				if (!_.isString(this.modelName)) {
+					return '';
+				}
+				return this.modelName.toLowerCase()+'s';
+			}			
+		};
+	};
+});
 define('RemoteModel/mixins/sync',[], function () {
 	
 
 	return function(/*SagaModel*/){
 		return {
 
-			urlRoot: function(options){
-				options = _.defaults(options||{}, {
-					baseApi: '/api'
-				});
-
+			urlRoot: function(){
 				if (this._customUrl) {
 					return this._customUrl;
 				}
@@ -460,7 +497,7 @@ define('RemoteModel/mixins/sync',[], function () {
 					return _.result(this.collection, 'url');
 				}
 
-				return options.baseApi+'/'+this.constructor.getCollectionName();
+				return '/api/'+this.constructor.getCollectionName();
 			}
 		};
 	};
@@ -803,6 +840,30 @@ define('RemoteModel/mixins/validation',[], function () {
 		};
 	};
 });
+define('RemoteModel/mixins/navigation',[], function () {
+	
+
+	return function(){
+		return {
+			navigateRepresentation: function(){
+				var base = ''
+				if (this._parent) {
+					base = this._parent.navigateRepresentation()+'/'+this._path||'';
+				}
+
+				if (this.collection) {
+					base = this.collection.navigateRepresentation();
+				}
+
+				if (!base) {
+					base = this.constructor.getCollectionName();	
+				}
+
+				return base +'/'+(this.isNew() ? 'new' : this.id);	
+			}
+		};
+	};
+});
 define('RemoteModel/Model',[
 	'./mixins/sync',
 	'./mixins/schema',
@@ -811,8 +872,11 @@ define('RemoteModel/Model',[
 	'./mixins/getterCreator',
 	'./mixins/lifeCycle',
 	'./mixins/validation',
+	'./mixins/navigation',
 	'./../shared/actions_mixin',
-	'./../shared/error_mixin'
+	'./../shared/error_mixin',
+	'./../shared/classShared_mixin'
+	
 ], function (
 	sync,
 	schema,
@@ -821,13 +885,16 @@ define('RemoteModel/Model',[
 	getterCreator,
 	lifeCycle,
 	validation,
+	navigation,
 	actions_mixin, 
-	error_mixin
+	error_mixin,
+	classShared_mixin
 
 ) {
 	
 	var SagaModel = require('sgc-model').Model;
-	
+
+	var clazz = _.extend({}, classShared_mixin(SagaModel));
 
 	var RemoteModel = SagaModel.extend({
 
@@ -848,15 +915,7 @@ define('RemoteModel/Model',[
 
 		idAttribute: '_id'
 		
-	}, {
-		modelName: null,
-		getCollectionName: function(){
-			if (!_.isString(this.modelName)) {
-				return '';
-			}
-			return this.modelName.toLowerCase()+'s';
-		}
-	});
+	}, clazz);
 
 	_.extend(RemoteModel.prototype, sync(SagaModel));
 	_.extend(RemoteModel.prototype, schema(SagaModel));
@@ -865,6 +924,7 @@ define('RemoteModel/Model',[
 	_.extend(RemoteModel.prototype, getterCreator(SagaModel));
 	_.extend(RemoteModel.prototype, lifeCycle(SagaModel));
 	_.extend(RemoteModel.prototype, validation(SagaModel));
+	_.extend(RemoteModel.prototype, navigation(SagaModel));
 	
 	_.extend(RemoteModel.prototype, actions_mixin(SagaModel));
 	_.extend(RemoteModel.prototype, error_mixin(SagaModel));
@@ -878,21 +938,28 @@ define('RemoteCollection/Collection',[
 	'./mixins/sync',
 	'./mixins/pagination',
 	'./mixins/helpers',
+	'./mixins/navigation',
 	'./../shared/actions_mixin',
 	'./../shared/error_mixin',
+	'./../shared/classShared_mixin',
 	'./../RemoteModel/Model'
 
 	], function (
 	sync,
 	pagination,
 	helpers,
+	navigation,
 	actions_mixin,
 	error_mixin,
+	classShared_mixin,
 	Model
 ) {
 	
 
 	var SagaCollection = require('sgc-model').Collection;
+
+
+	var clazz = _.extend({}, classShared_mixin(SagaCollection));
 
 	var RemoteCollection = SagaCollection.extend({
 		
@@ -921,11 +988,12 @@ define('RemoteCollection/Collection',[
 
 		model:Model
 
-	});
+	}, clazz);
 
 	_.extend(RemoteCollection.prototype, sync(SagaCollection));
 	_.extend(RemoteCollection.prototype, pagination(SagaCollection));
 	_.extend(RemoteCollection.prototype, helpers(SagaCollection));
+	_.extend(RemoteCollection.prototype, navigation(SagaCollection));
 	
 	_.extend(RemoteCollection.prototype, actions_mixin(SagaCollection));
 	_.extend(RemoteCollection.prototype, error_mixin(SagaCollection));

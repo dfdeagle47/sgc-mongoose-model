@@ -29,10 +29,24 @@ define([
                 collection.add({_id:'1'});
                 collection.length.should.equal(1);
 
-            });		
+            });
+
+            it('Get or create with id', function(){
+                var collection = new Collection();
+                collection.add('1');
+                collection.get('2', {getOrCreate:true});
+                collection.length.should.equal(2);
+
+                collection.get({_id:'3515'}, {getOrCreate:true});
+                collection.length.should.equal(3);
+
+
+                collection.get({_id:'3515'}, {getOrCreate:true});
+                collection.length.should.equal(3);
+
+                collection.get('3515', {getOrCreate:true});
+                collection.length.should.equal(3);
+            });                 
 		});
-
-
-
 	};
 });

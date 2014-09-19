@@ -289,6 +289,19 @@ define('RemoteCollection/mixins/helpers',[], function () {
 	return function(Collection){
 		return {
 
+
+			get: function(idOrObj, options){
+				options = _.defaults(options||{}, {
+					getOrCreate:false
+				});
+				var obj = Collection.prototype.get.apply(this, arguments);
+				if (!obj && options.getOrCreate) {
+					this.add(idOrObj);
+					return this.get(idOrObj);
+				}
+				return obj;
+			},
+
 			__wrapIdInsideAttrs: function(id){
 				var attrs = {};
 				attrs[this.model.prototype.idAttribute] = id;

@@ -671,8 +671,12 @@ define('RemoteModel/mixins/setter',[], function () {
 				}
 			}, 
 
-			setPrimitiveAttribute: function(attr, raw){
-				return this.set(attr, raw, {force:true});
+			setPrimitiveAttribute: function(attr, raw, options){
+				options = _.extend(options||{}, {
+					force:true
+				});
+
+				return this.set(attr, raw, options);
 			},
 
 			setModelAttribute: function(attr, raw, options){

@@ -24,9 +24,9 @@ define([
 					return;
 				}
 
-				// if (this._hasSchemaAttribute(attribute)) {
-				// 	throw new Error('Attribute already use');
-				// }
+				if (this.get(attribute, {lazyCreation:false})) {
+					throw new Error('Attribute already use and setted');
+				}
 
 				var descriptor = new Descriptor(descriptorData);
 

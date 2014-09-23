@@ -5,7 +5,7 @@ define([
     'use strict';
     return function() {
 
-        var expect = chai.expect;
+        // var expect = chai.expect;
         var Model = RemoteModel.Model;
         var Collection = RemoteModel.Collection;
 
@@ -140,6 +140,24 @@ define([
                 chai.assert.equal(model.anAttribute instanceof SubModel2, true);
 
             });
+
+
+            it('Test set schema for already defined attribute', function () {
+                var model = new Model();
+
+                var SubModel1 = Model.extend();
+                var SubModel2 = Model.extend();
+
+                model.generateSchemaAttribute('anAttribute', {type:'MODEL', generator:SubModel1});
+
+                model.anAttribute;
+
+                chai.expect(function(){
+                    model.generateSchemaAttribute('anAttribute', {type:'MODEL', generator:SubModel2});    
+                }).to['throw'](Error);
+
+            });
+
 
            it('Test setter lazy creation params  ', function () {
                 var model = new Model();

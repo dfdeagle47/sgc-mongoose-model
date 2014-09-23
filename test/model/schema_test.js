@@ -130,11 +130,15 @@ define([
 
             it('Test add twice same schema attribute', function () {
                 var model = new Model();
-                model.generateSchemaAttribute('anAttribute', {type:'PRIMITIVE'});
 
-                expect(function(){
-                    model.generateSchemaAttribute('anAttribute', {type:'PRIMITIVE'});
-                }).to['throw'](Error);
+                var SubModel1 = Model.extend();
+                var SubModel2 = Model.extend();
+
+                model.generateSchemaAttribute('anAttribute', {type:'MODEL', generator:SubModel1});
+                model.generateSchemaAttribute('anAttribute', {type:'MODEL', generator:SubModel2});
+
+                chai.assert.equal(model.anAttribute instanceof SubModel2, true);
+
             });
 
            it('Test setter lazy creation params  ', function () {

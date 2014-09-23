@@ -24,9 +24,9 @@ define([
 					return;
 				}
 
-				if (this._hasSchemaAttribute(attribute)) {
-					throw new Error('Attribute already use');
-				}
+				// if (this._hasSchemaAttribute(attribute)) {
+				// 	throw new Error('Attribute already use');
+				// }
 
 				var descriptor = new Descriptor(descriptorData);
 
@@ -52,9 +52,9 @@ define([
 			},
 
 			generateSchemaAttribute: function(attribute, options){
-				if (this._hasSchemaAttribute(attribute)) {
-					throw new Error('Attribute already use');
-				}
+				// if (this._hasSchemaAttribute(attribute)) {
+				// 	throw new Error('Attribute already use');
+				// }
 
 				options = _.defaults(options|| {}, {
 					type:'PRIMITIVE', /* PRIMITIVE, COLLECTION, MODEL */

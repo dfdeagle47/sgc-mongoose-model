@@ -569,7 +569,7 @@ define('RemoteModel/mixins/schema',[
 					return;
 				}
 
-				if (this.get(attribute, {lazyCreation:false})) {
+				if (this.get(attribute, {lazyCreation:false}) && this._hasSchemaAttribute(attribute)) {
 					throw new Error('Attribute already use and setted');
 				}
 

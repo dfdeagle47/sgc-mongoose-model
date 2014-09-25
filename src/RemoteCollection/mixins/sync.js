@@ -13,6 +13,8 @@ define([], function () {
 				if (this._parent) {
 					return  _.result(this._parent, 'url')+'/'+this._path||'';
 				}
+
+				return '/api/'+this.constructor.getCollectionName();
 			},
 
 			fetch: function(options){

@@ -142,21 +142,21 @@ define([
             });
 
 
-            it('Test set schema for already defined attribute', function () {
-                var model = new Model();
+            // it('Test set schema for already defined attribute', function () {
+            //     var model = new Model();
 
-                var SubModel1 = Model.extend();
-                var SubModel2 = Model.extend();
+            //     var SubModel1 = Model.extend();
+            //     var SubModel2 = Model.extend();
 
-                model.generateSchemaAttribute('anAttribute', {type:'MODEL', generator:SubModel1});
+            //     model.generateSchemaAttribute('anAttribute', {type:'MODEL', generator:SubModel1});
 
-                model.anAttribute;
+            //     model.anAttribute;
 
-                chai.expect(function(){
-                    model.generateSchemaAttribute('anAttribute', {type:'MODEL', generator:SubModel2});    
-                }).to['throw'](Error);
+            //     chai.expect(function(){
+            //         model.generateSchemaAttribute('anAttribute', {type:'MODEL', generator:SubModel2});    
+            //     }).to['throw'](Error);
 
-            });
+            // });
 
 
            it('Test setter lazy creation params  ', function () {

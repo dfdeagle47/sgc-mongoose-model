@@ -571,9 +571,9 @@ define('RemoteModel/mixins/schema',[
 					return;
 				}
 
-				if (this.get(attribute, {lazyCreation:false}) && this._hasSchemaAttribute(attribute)) {
-					throw new Error('Attribute already use and setted');
-				}
+				// if (this.get(attribute, {lazyCreation:false}) && this._hasSchemaAttribute(attribute)) {
+				// 	throw new Error('Attribute already use and setted');
+				// }
 
 				var descriptor = new Descriptor(descriptorData);
 
@@ -928,12 +928,14 @@ define('RemoteModel/Model',[
 				path: null
 			});
 
+			this.configureSchema();
+
 			var res =  SagaModel.prototype.constructor.apply(this, arguments);
 
 			this._path = options.path;
 			this._parent = options.parent;
 
-			this.configureSchema();
+			
 			return res;
 		},
 

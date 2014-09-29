@@ -38,12 +38,14 @@ define([
 				path: null
 			});
 
+			this.configureSchema();
+
 			var res =  SagaModel.prototype.constructor.apply(this, arguments);
 
 			this._path = options.path;
 			this._parent = options.parent;
 
-			this.configureSchema();
+			
 			return res;
 		},
 

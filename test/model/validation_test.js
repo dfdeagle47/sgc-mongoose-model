@@ -90,6 +90,66 @@ define([
                 error.model.should.equal(model.submodel);
             });
 
+
+            it('test JSON sub format for model', function(){
+                var model = new Model();
+
+                var SubModel = Model.extend({
+                    configureSchema: function(){
+                        model.generateSchemaAttribute('anAttr1');       
+                        model.generateSchemaAttribute('anAttr2')
+                    }
+                });
+
+                model.generateSchemaAttribute('submodelIn1', {type:'MODEL', generator:SubModel, jsonFormat:'_id'});
+                model.generateSchemaAttribute('submodelIn2', {type:'MODEL', generator:SubModel, jsonFormat:['anAttr1']});
+                
+                model.set('submodelIn1', {_id:'351531'});
+                model.set('submodelIn2', {_id:'35153144', anAttr1:'anAttr1', anAttr2:'anAttr2'});
+                
+                var res = model.toJSON();
+                res.submodelIn1.should.equal('351531');
+                res.submodelIn2.anAttr1.should.equal('anAttr1');
+            });
+
+            it('test JSON sub format for collection', function(){
+
+                var Collection1 = Collection.extend({
+                    model:Model.extend({
+                        configureSchema: function(){
+                            this.generateSchemaAttribute('anAttr1');
+                            this.generateSchemaAttribute('anAttr2');
+                            Model.prototype.configureSchema.apply(this, arguments);
+                        }
+                    })
+                });
+
+                var Collection2 = Collection.extend();
+
+
+                var model = new (Model.extend({
+                    configureSchema: function(){
+                        this.generateSchemaAttribute('collection1', {type:'COLLECTION', generator:Collection1, jsonFormat:'_id'});
+                        this.generateSchemaAttribute('collection2', {type:'COLLECTION', generator:Collection2, jsonFormat:['anAttr2']});
+                    }
+                }))();
+
+                model.set('collection1', ['351', '24274']);
+                model.set('collection2', [{anAttr2:'anAttr2', anAttr1:'anAttr1'}]);
+
+                var res = model.toJSON();
+
+                res.collection1.length.should.equal(2);
+                res.collection1[0].should.equal('351');
+
+                res.collection2.length.should.equal(1);
+                res.collection2[0].anAttr2.should.equal('anAttr2');
+
+
+
+            });
+
+
         });
     };
 });

@@ -38,6 +38,7 @@ define([], function () {
 
 				return SagaCollection.prototype.fetch.apply(this, [options]);
 			}
+			
 		};
 	};
 });

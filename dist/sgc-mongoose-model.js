@@ -38,6 +38,7 @@ define('RemoteCollection/mixins/sync',[], function () {
 
 				return SagaCollection.prototype.fetch.apply(this, [options]);
 			}
+			
 		};
 	};
 });
@@ -517,7 +518,50 @@ define('RemoteModel/mixins/sync',[], function () {
 				}
 
 				return '/api/'+this.constructor.getCollectionName();
+			},
+
+
+			toJSON: function(options){
+				var options = _.defaults(options||{}, {
+					attributesToKeep: _.keys(this.attributes),
+				});
+
+				if (_.isString(options.attributesToKeep)) {
+					return this.toJSONAnAttribute(options.attributesToKeep);
+				}
+
+				var res = {};
+				for (var i = 0; i < options.attributesToKeep.length; i++) {
+					var val = this.toJSONAnAttribute(options.attributesToKeep[i]);
+					if (val != undefined) {
+						res[options.attributesToKeep[i]] = val;	
+					}
+				}
+
+				return res;
+			},
+
+			toJSONAnAttribute: function(path, options){
+				var descriptor = this._getSchemaDescription(path);
+				if (!descriptor) {
+					return this.get(path);
+				}
+				var currentValue = this.get(path, {lazyCreation:false});
+				if (currentValue === undefined) {
+					return;
+				}
+
+				if (descriptor.isModelDescriptor()) {
+					return currentValue.toJSON({attributesToKeep:descriptor.jsonFormat});
+				}
+				if (descriptor.isCollectionDescriptor()) {
+					return currentValue.toJSON({attributesToKeep:descriptor.jsonFormat});
+				}
+				if (descriptor.isPrimitiveDescriptor()) {
+					return currentValue
+				}
 			}
+
 		};
 	};
 });

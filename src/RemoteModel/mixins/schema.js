@@ -27,7 +27,6 @@ define([
 				// if (this.get(attribute, {lazyCreation:false}) && this._hasSchemaAttribute(attribute)) {
 				// 	throw new Error('Attribute already use and setted');
 				// }
-
 				var descriptor = new Descriptor(descriptorData);
 
 				this._getSchemaAttributes()[attribute] = descriptor;
@@ -57,7 +56,7 @@ define([
 				// }
 
 				options = _.defaults(options|| {}, {
-					type:'PRIMITIVE', /* PRIMITIVE, COLLECTION, MODEL */
+					// type:'PRIMITIVE', /* PRIMITIVE, COLLECTION, MODEL */
 					// generator:null, /* RemoteModel or RemoveCollection*/
 					attribute:attribute
 				});

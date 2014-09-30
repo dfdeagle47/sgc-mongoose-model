@@ -525,6 +525,9 @@ define('RemoteModel/descriptor/Descriptor',[], function () {
 	
 
 	var Descriptor = function(info){
+		info = _.defaults(info|| {}, {
+			type:"PRIMITIVE"
+		})
 		_.extend(this, info);
 	};
 
@@ -537,6 +540,19 @@ define('RemoteModel/descriptor/Descriptor',[], function () {
 				}
 			}
 		},
+
+		isPrimitiveDescriptor: function(path){
+			return this.type == "PRIMITIVE";
+		},
+
+		isModelDescriptor: function(path){
+			return this.type == "MODEL";
+		},
+
+		isCollectionDescriptor: function(path){
+			return this.type == "COLLECTION";
+		},
+
 
 		isValidable: function(){
 			return true;
@@ -574,7 +590,6 @@ define('RemoteModel/mixins/schema',[
 				// if (this.get(attribute, {lazyCreation:false}) && this._hasSchemaAttribute(attribute)) {
 				// 	throw new Error('Attribute already use and setted');
 				// }
-
 				var descriptor = new Descriptor(descriptorData);
 
 				this._getSchemaAttributes()[attribute] = descriptor;
@@ -604,7 +619,7 @@ define('RemoteModel/mixins/schema',[
 				// }
 
 				options = _.defaults(options|| {}, {
-					type:'PRIMITIVE', /* PRIMITIVE, COLLECTION, MODEL */
+					// type:'PRIMITIVE', /* PRIMITIVE, COLLECTION, MODEL */
 					// generator:null, /* RemoteModel or RemoveCollection*/
 					attribute:attribute
 				});
@@ -742,21 +757,21 @@ define('RemoteModel/mixins/getterCreator',[], function () {
 	return function(/*SagaModel*/){
 		return {
 
-
 			tryGenerateDefaultValue: function(descriptor){
 				if (!descriptor) {
 					throw new Error('Unknow type');
 				}
-				switch(descriptor.type){
-					case 'PRIMITIVE':
-						return this.generateDefaultPrimitiveForAttribute(descriptor);
-					case 'COLLECTION':
-						return this.generateDefaultCollectionForAttribute(descriptor);
-					case 'MODEL':
-						return this.generateDefaultModelForAttribute(descriptor);
-					default:
-						throw new Error('Unknow type');
+
+				if(descriptor.isPrimitiveDescriptor()) {
+					return this.generateDefaultPrimitiveForAttribute(descriptor);
 				}
+				if(descriptor.isModelDescriptor()) {
+					return this.generateDefaultModelForAttribute(descriptor);
+				}
+				if(descriptor.isCollectionDescriptor()) {
+					return this.generateDefaultCollectionForAttribute(descriptor); 
+				}
+				throw new Error('Unknow type');
 			},
 
 			generateDefaultModelForAttribute: function(descriptor) {

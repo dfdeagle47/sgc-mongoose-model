@@ -101,8 +101,9 @@ define([
                 }, {
                     modelName:'User'
                 }))();
-                var result = model.tryGenerateDefaultValue({type:'PRIMITIVE', 'default':'abcdefg'});
-                chai.assert.equal(result, 'abcdefg');   
+                
+                model.generateSchemaAttribute('anAttr', {'type':'PRIMITIVE', 'default':'abcdefg'});
+                chai.assert.equal(model.anAttr, 'abcdefg');   
             });
 
             it('Test default generator for model', function () {
@@ -113,8 +114,9 @@ define([
 
                 var SubModel = Model.extend();
 
-                var result = model.tryGenerateDefaultValue({type:'MODEL', 'generator':SubModel});
-                chai.expect(result).to.be.an['instanceof'](SubModel);
+                model.generateSchemaAttribute('anAttr', {'type':'MODEL', 'generator':SubModel});
+
+                chai.expect(model.anAttr).to.be.an['instanceof'](SubModel);
             });
 
             it('Test default generator for collection', function () {
@@ -123,8 +125,10 @@ define([
                     modelName:'User'
                 }))();
 
-                var result = model.tryGenerateDefaultValue({type:'COLLECTION', 'generator':Collection});
-                chai.expect(result).to.be.an['instanceof'](Collection);
+                // var result = model.tryGenerateDefaultValue({type:'COLLECTION', 'generator':Collection});
+                model.generateSchemaAttribute('anAttr', {'type':'COLLECTION', 'generator':Collection});
+
+                chai.expect(model.anAttr).to.be.an['instanceof'](Collection);
             });
 
 

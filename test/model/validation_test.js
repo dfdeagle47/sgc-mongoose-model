@@ -44,6 +44,7 @@ define([
                 model.generateSchemaAttribute('subcollection1', {type:'COLLECTION', generator:SubCollection});
 
                 model.validate();
+
                 chai.assert.equal(validateCount, 4);
             });
 

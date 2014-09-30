@@ -4,21 +4,21 @@ define([], function () {
 	return function(/*SagaModel*/){
 		return {
 
-
 			tryGenerateDefaultValue: function(descriptor){
 				if (!descriptor) {
 					throw new Error('Unknow type');
 				}
-				switch(descriptor.type){
-					case 'PRIMITIVE':
-						return this.generateDefaultPrimitiveForAttribute(descriptor);
-					case 'COLLECTION':
-						return this.generateDefaultCollectionForAttribute(descriptor);
-					case 'MODEL':
-						return this.generateDefaultModelForAttribute(descriptor);
-					default:
-						throw new Error('Unknow type');
+
+				if(descriptor.isPrimitiveDescriptor()) {
+					return this.generateDefaultPrimitiveForAttribute(descriptor);
 				}
+				if(descriptor.isModelDescriptor()) {
+					return this.generateDefaultModelForAttribute(descriptor);
+				}
+				if(descriptor.isCollectionDescriptor()) {
+					return this.generateDefaultCollectionForAttribute(descriptor); 
+				}
+				throw new Error('Unknow type');
 			},
 
 			generateDefaultModelForAttribute: function(descriptor) {

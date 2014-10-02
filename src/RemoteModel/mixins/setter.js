@@ -46,7 +46,7 @@ define([], function () {
 					force:true
 				});
 
-				return this.set(attr, raw, options);
+				return SagaModel.prototype.set.apply(this, arguments);
 			},
 
 			setModelAttribute: function(attr, raw, options){

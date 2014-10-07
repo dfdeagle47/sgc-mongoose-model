@@ -1090,16 +1090,16 @@ define('Prototype/Backbone',[
 ) {
 	
 
-	var Backbone = require('backbone');
-	var DefaultBackboneSync = Backbone.sync;
-	Backbone.sync = function (method, model, options) {
-		options = _.defaults(options || {}, {
-			contentType: 'application/json; charset=utf-8',
-			auth: true
-		});
+	// var Backbone = require('backbone');
+	// var DefaultBackboneSync = Backbone.sync;
+	// Backbone.sync = function (method, model, options) {
+	// 	options = _.defaults(options || {}, {
+	// 		contentType: 'application/json; charset=utf-8',
+	// 		auth: true
+	// 	});
 
-		return DefaultBackboneSync.apply(this, [method, model, options]);
-	};
+	// 	return DefaultBackboneSync.apply(this, [method, model, options]);
+	// };
 	
 });
 define('sgc-mongoose-model',[

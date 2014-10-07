@@ -61,7 +61,7 @@ define([], function () {
 
 			generateUrlForAction: function(actionName){
 				var baseUrl = _.result(this, 'url');
-				return baseUrl+='/'+actionName;			
+				return baseUrl+='/'+_.string.underscored(actionName);
 			}
 
 		};

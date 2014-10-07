@@ -426,7 +426,7 @@ define('shared/actions_mixin',[], function () {
 
 			generateUrlForAction: function(actionName){
 				var baseUrl = _.result(this, 'url');
-				return baseUrl+='/'+actionName;			
+				return baseUrl+='/'+_.string.underscored(actionName);
 			}
 
 		};
@@ -1085,14 +1085,32 @@ define('RemoteCollection/Collection',[
 	
 	return RemoteCollection;
 });
+define('Prototype/Backbone',[	
+], function (
+) {
+	
+
+	var Backbone = require('backbone');
+	var DefaultBackboneSync = Backbone.sync;
+	Backbone.sync = function (method, model, options) {
+		options = _.defaults(options || {}, {
+			contentType: 'application/json; charset=utf-8',
+			auth: true
+		});
+
+		return DefaultBackboneSync.apply(this, [method, model, options]);
+	};
+	
+});
 define('sgc-mongoose-model',[
 	'./RemoteCollection/Collection',
-	'./RemoteModel/Model'
+	'./RemoteModel/Model',
+	'./Prototype/Backbone'
 	],
 function (
 	Collection, 
 	Model
-		) {
+) {
 	
 
 	return {

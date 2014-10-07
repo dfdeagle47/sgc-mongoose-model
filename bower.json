@@ -22,7 +22,8 @@
 		"requirejs": "^2.1.14",
 		"backbone": "^1.1.2",
 		"jquery": "^2.1.1",
-		"sgc-model": "git@github.com:Sagacify/sgc-model.git"
+		"sgc-model": "git@github.com:Sagacify/sgc-model.git",
+		"underscore.string": "^2.3.3"
 	},
 	"author": {
 		"name": "Sagacify Team",

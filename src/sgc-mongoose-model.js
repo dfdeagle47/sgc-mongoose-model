@@ -1,11 +1,12 @@
 define([
 	'./RemoteCollection/Collection',
-	'./RemoteModel/Model'
+	'./RemoteModel/Model',
+	'./Prototype/Backbone'
 	],
 function (
 	Collection, 
 	Model
-		) {
+) {
 	'use strict';
 
 	return {

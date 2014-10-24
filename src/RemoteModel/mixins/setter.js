@@ -61,7 +61,7 @@ define([], function () {
 				if (_.isString(raw)) {
 					var identifier = raw;
 					raw = {};
-					raw[this._getSchemaDescription(attr).generetor.prototype.idAttribute] = identifier;
+					raw[this._getSchemaDescription(attr).generator.prototype.idAttribute] = identifier;
 				}
 
 				var res = this.get(attr).set(raw);

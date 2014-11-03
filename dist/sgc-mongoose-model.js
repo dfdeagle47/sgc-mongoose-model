@@ -697,7 +697,7 @@ define('RemoteModel/mixins/getter',[], function () {
 			},
 
 			has: function(attr){
-				return !!this.get(attr, {lazyCreation:false});
+				return !this.get(attr, {lazyCreation:false}) !== undefined;
 			}
 		};
 	};

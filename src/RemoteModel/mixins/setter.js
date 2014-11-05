@@ -64,6 +64,10 @@ define([], function () {
 					raw[this._getSchemaDescription(attr).generator.prototype.idAttribute] = identifier;
 				}
 
+				if (raw === undefined) {
+					raw = {};
+				}
+
 				var res = this.get(attr).set(raw);
 				this.trigger('change:'+attr, this, raw, options);
 				return res;
@@ -78,6 +82,10 @@ define([], function () {
 					this.set(attr, raw, {force:true});
 					return;
 				}
+
+				if (raw === undefined) {
+					raw = [];
+				};
 
 				if (!_.isArray(raw)) {
 					throw new Error('Strange raw data for collection expect an array');

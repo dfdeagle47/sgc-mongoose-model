@@ -918,7 +918,9 @@ define('RemoteModel/mixins/validation',[], function () {
 				if (descriptor.isValidable()) {
 					options = _.clone(options);
 					var attriVal = this.get(attribute, {lazyCreation:options.lazyCreation});
-
+					if (!attriVal.validate) {
+						return;
+					};
 					var subOptions = _.clone(options);
 					subOptions.lazyCreation = false;
 					var error = (attriVal && (attriVal.validate(undefined, subOptions)));

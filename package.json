@@ -1,7 +1,7 @@
 {
 	"name": "sgc-mongoose-model",
 	"private": true,
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"description": "Sagacify's client data Model module.",
 	"main": "dist/sgc-mongoose-model.min.js",
 	"dependencies": {},
